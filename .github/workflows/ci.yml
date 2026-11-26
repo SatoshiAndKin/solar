@@ -551,7 +551,7 @@ jobs:
   ci-success:
     name: ci success
     runs-on: ubuntu-latest
-    if: always() && github.event_name != 'schedule'
+    if: ${{ !cancelled() && github.event_name != 'schedule' }}
     permissions: {}
     needs:
       - evm-rules
