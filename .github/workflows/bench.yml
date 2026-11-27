@@ -407,10 +407,14 @@ jobs:
           if-no-files-found: ignore
 
   codspeed:
+    # Keep CodSpeed publication on upstream, without consuming fork capacity.
     if: >-
-      github.event_name != 'workflow_dispatch' ||
-      inputs.benchmark == 'all' ||
-      inputs.benchmark == 'codspeed'
+      github.repository == 'paradigmxyz/solar' &&
+      (
+        github.event_name != 'workflow_dispatch' ||
+        inputs.benchmark == 'all' ||
+        inputs.benchmark == 'codspeed'
+      )
     runs-on: depot-ubuntu-latest-8
     permissions:
       id-token: write
